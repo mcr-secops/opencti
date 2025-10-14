@@ -1,59 +1,12 @@
 import * as R from 'ramda';
 import { BUS_TOPICS, ENABLED_DEMO_MODE, logApp } from '../config/conf';
 import { AuthenticationFailure } from '../config/errors';
-import passport from '../config/providers-initialization';
+import passport, { getProviders } from '../config/providers-initialization';
 import { internalLoadById } from '../database/middleware-loader';
 import { fetchEditContext } from '../database/redis';
 import { applicationSession, findSessions, findUserSessions, killSession, killUserSessions } from '../database/session';
 import { addRole } from '../domain/grant';
-import {
-  addBookmark,
-  addUser,
-  assignOrganizationToUser,
-  sessionAuthenticateUser,
-  bookmarks,
-  buildCompleteUser,
-  deleteBookmark,
-  findMembersPaginated,
-  findAllSystemMemberPaginated,
-  findAssignees,
-  findById,
-  findCapabilities,
-  findCreators,
-  findDefaultDashboards,
-  findParticipants,
-  findRoleById,
-  findRoles,
-  getUserEffectiveConfidenceLevel,
-  groupRolesPaginated,
-  meEditField,
-  otpUserActivation,
-  otpUserDeactivation,
-  otpUserGeneration,
-  otpUserLogin,
-  roleAddRelation,
-  roleCapabilities,
-  roleCleanContext,
-  roleDelete,
-  roleDeleteRelation,
-  roleEditContext,
-  roleEditField,
-  userAddRelation,
-  userCleanContext,
-  userDelete,
-  userDeleteOrganizationRelation,
-  userEditContext,
-  userEditField,
-  userGroupsPaginated,
-  userIdDeleteRelation,
-  userOrganizationsPaginated,
-  userOrganizationsPaginatedWithoutInferences,
-  userRenewToken,
-  userWithOrigin,
-  userRoles,
-  sendEmailToUser,
-  findUserPaginated
-} from '../domain/user';
+import { addBookmark, addUser, assignOrganizationToUser, bookmarks, buildCompleteUser, deleteBookmark, findAllSystemMemberPaginated, findAssignees, findById, findCapabilities, findCreators, findDefaultDashboards, findMembersPaginated, findParticipants, findRoleById, findRoles, findUserPaginated, getUserEffectiveConfidenceLevel, groupRolesPaginated, meEditField, otpUserActivation, otpUserDeactivation, otpUserGeneration, otpUserLogin, roleAddRelation, roleCapabilities, roleCleanContext, roleDelete, roleDeleteRelation, roleEditContext, roleEditField, sendEmailToUser, sessionAuthenticateUser, userAddRelation, userCleanContext, userDelete, userDeleteOrganizationRelation, userEditContext, userEditField, userGroupsPaginated, userIdDeleteRelation, userOrganizationsPaginated, userOrganizationsPaginatedWithoutInferences, userRenewToken, userRoles, userWithOrigin } from '../domain/user';
 import { subscribeToInstanceEvents, subscribeToUserEvents } from '../graphql/subscriptionWrapper';
 import { publishUserAction } from '../listener/UserActionListener';
 import { findById as findDraftById } from '../modules/draftWorkspace/draftWorkspace-domain';
@@ -61,7 +14,6 @@ import { findById as findWorskpaceById } from '../modules/workspace/workspace-do
 import { ENTITY_TYPE_USER } from '../schema/internalObject';
 import { executionContext, REDACTED_USER } from '../utils/access';
 import { getNotifiers } from '../modules/notifier/notifier-domain';
-import { PROVIDERS } from '../config/providers-configuration';
 import { RELATION_HAS_CAPABILITY_IN_DRAFT } from '../schema/internalRelationship';
 
 const userResolvers = {
@@ -145,7 +97,7 @@ const userResolvers = {
     otpLogin: (_, { input }, { req, user }) => otpUserLogin(req, user, input),
     token: async (_, { input }, { req }) => {
       // We need to iterate on each provider to find one that validated the credentials
-      const formProviders = R.filter((p) => p.type === 'FORM', PROVIDERS);
+      const formProviders = R.filter((p) => p.type === 'FORM', (await getProviders()));
       if (formProviders.length === 0) {
         logApp.warn('Cant authenticate without any form providers');
       }
@@ -163,8 +115,8 @@ const userResolvers = {
         });
         // As soon as credential is validated, stop looking for another provider
         if (user) {
-          const context = executionContext(`${provider}_strategy`);
-          loggedUser = await sessionAuthenticateUser(context, req, user, provider);
+          const execContext = executionContext(`${provider}_strategy`);
+          loggedUser = await sessionAuthenticateUser(execContext, req, user, provider);
           break;
         }
       }

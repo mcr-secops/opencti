@@ -33,9 +33,10 @@ export const rootPublicQuery = graphql`
       platform_consent_confirm_text
       platform_whitemark
       platform_providers {
-        name
+        identifier
         type
         provider
+        disabled
       }
       playground_enabled
       ...AppIntlProvider_settings

@@ -21602,10 +21602,14 @@ export type ProcessAddInput = {
 
 export type Provider = {
   __typename?: 'Provider';
-  name: Scalars['String']['output'];
+  config: Scalars['String']['output'];
+  disabled?: Maybe<Scalars['Boolean']['output']>;
+  dynamic: Scalars['Boolean']['output'];
+  identifier: Scalars['String']['output'];
   provider?: Maybe<Scalars['String']['output']>;
-  strategy?: Maybe<Scalars['String']['output']>;
+  strategy: Scalars['String']['output'];
   type?: Maybe<Scalars['String']['output']>;
+  valid: Scalars['Boolean']['output'];
 };
 
 export type PublicDashboard = BasicObject & InternalObject & {
@@ -21674,7 +21678,8 @@ export type PublicDistribution = {
 
 export type PublicProvider = {
   __typename?: 'PublicProvider';
-  name: Scalars['String']['output'];
+  disabled?: Maybe<Scalars['Boolean']['output']>;
+  identifier: Scalars['String']['output'];
   provider: Scalars['String']['output'];
   type: Scalars['String']['output'];
 };
@@ -44416,10 +44421,14 @@ export type ProcessResolvers<ContextType = any, ParentType extends ResolversPare
 }>;
 
 export type ProviderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Provider'] = ResolversParentTypes['Provider']> = ResolversObject<{
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  config?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  disabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  dynamic?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  identifier?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   provider?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  strategy?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  strategy?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  valid?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
 }>;
 
 export type PublicDashboardResolvers<ContextType = any, ParentType extends ResolversParentTypes['PublicDashboard'] = ResolversParentTypes['PublicDashboard']> = ResolversObject<{
@@ -44464,7 +44473,8 @@ export type PublicDistributionResolvers<ContextType = any, ParentType extends Re
 }>;
 
 export type PublicProviderResolvers<ContextType = any, ParentType extends ResolversParentTypes['PublicProvider'] = ResolversParentTypes['PublicProvider']> = ResolversObject<{
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  disabled?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  identifier?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   provider?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
 }>;
