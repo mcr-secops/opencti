@@ -2281,6 +2281,7 @@ input MigrateConnectorToManagedInput {
   contractSlug: String!
   configuration: [ContractConfigInput!]
   preserveState: Boolean
+  convertUserToServiceAccount: Boolean
 }
 
 type MigrationAssessmentSummary {
@@ -2312,6 +2313,7 @@ type MissingConfigKey {
   description: String!
   format: String
   enum: [String!]
+  default: JSON
 }
 
 type MigrationAssessment {
