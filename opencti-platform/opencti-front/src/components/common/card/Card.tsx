@@ -10,6 +10,7 @@ interface CardProps extends PropsWithChildren {
   noPadding?: boolean
   sx?: SxProps
   fullHeight?: boolean
+  onClick?: () => void
 }
 
 const Card = ({
@@ -18,7 +19,8 @@ const Card = ({
   action,
   noPadding = false,
   sx = {},
-  fullHeight = true
+  fullHeight = true,
+  onClick
 }: CardProps) => {
   const theme = useTheme<Theme>();
   
@@ -38,7 +40,7 @@ const Card = ({
           {title}
         </CardTitle>
       )}
-      <CardMui sx={containerSx}>
+      <CardMui sx={containerSx} onClick={onClick}>
         {children}
       </CardMui>
     </Stack>
