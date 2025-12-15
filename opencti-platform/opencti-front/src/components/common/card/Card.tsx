@@ -5,12 +5,12 @@ import CardTitle from './CardTitle';
 import { Theme } from '../../Theme';
 
 interface CardProps extends PropsWithChildren {
-  title?: ReactNode
-  action?: ReactNode
-  noPadding?: boolean
-  sx?: SxProps
-  fullHeight?: boolean
-  onClick?: () => void
+  title?: ReactNode;
+  action?: ReactNode;
+  noPadding?: boolean;
+  sx?: SxProps;
+  fullHeight?: boolean;
+  onClick?: () => void;
 }
 
 const Card = ({
@@ -20,17 +20,17 @@ const Card = ({
   noPadding = false,
   sx = {},
   fullHeight = true,
-  onClick
+  onClick,
 }: CardProps) => {
   const theme = useTheme<Theme>();
-  
+
   const containerSx: SxProps = {
     position: 'relative',
     flexGrow: fullHeight ? 1 : 0,
     padding: noPadding ? 0 : theme.spacing(3),
-    borderRadius: theme.spacing(.5),
+    borderRadius: theme.spacing(0.5),
     background: theme.palette.background.secondary,
-    ...sx
+    ...sx,
   };
 
   return (

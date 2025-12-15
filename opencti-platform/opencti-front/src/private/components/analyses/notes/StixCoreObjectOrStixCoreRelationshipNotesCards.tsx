@@ -465,18 +465,18 @@ const StixCoreObjectOrStixCoreRelationshipNotesCards: FunctionComponent<
             />
           );
         })}
-        
+
         <Security needs={[KNOWLEDGE_KNPARTICIPATE]}>
           <Accordion
             expanded={open}
             variant="outlined"
             sx={{
-            spacing: 1,
-            borderBottomLeftRadius: '4px!important', // override mui theme accordion
-            borderBottomRightRadius: '4px!important',
-            borderRadius: 1,
-            '&:before': { backgroundColor: 'transparent' },
-          }}
+              spacing: 1,
+              borderBottomLeftRadius: '4px!important', // override mui theme accordion
+              borderBottomRightRadius: '4px!important',
+              borderRadius: 1,
+              '&:before': { backgroundColor: 'transparent' },
+            }}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreOutlined />}

@@ -6,22 +6,22 @@ import type { Theme } from '../../Theme';
 import Card from './Card';
 
 interface CardAccordionProps extends PropsWithChildren {
-  title?: string
-  action?: ReactNode
-  preview: ReactNode
+  title?: string;
+  action?: ReactNode;
+  preview: ReactNode;
 }
 
-const CardAccordion = ({ 
-  title, 
-  action, 
-  children, 
-  preview 
+const CardAccordion = ({
+  title,
+  action,
+  children,
+  preview,
 }: CardAccordionProps) => {
   const theme = useTheme<Theme>();
 
   const containerSx: SxProps = {
     padding: theme.spacing(3),
-    background: theme.palette.background.secondary
+    background: theme.palette.background.secondary,
   };
 
   const summarySx: SxProps = {
@@ -43,7 +43,7 @@ const CardAccordion = ({
 
   return (
     <Card title={title} action={action} noPadding>
-      <Accordion 
+      <Accordion
         sx={containerSx}
         slotProps={{ transition: { unmountOnExit: false } }}
       >

@@ -29,7 +29,7 @@ const Connectors = () => {
             return <WorkersStatus data={props} />;
           }}
         />
-        <div style={{marginTop: 24}}>
+        <div style={{ marginTop: 24 }}>
           <ConnectorsStatus />
         </div>
       </PageContainer>

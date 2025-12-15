@@ -128,10 +128,10 @@ const SecurityCoverageAttackPatterns = ({
   }, [killChains.length, selectedKillChain]); // Use killChains.length instead of killChains to avoid dependency array issues
 
   return (
-    <Card 
+    <Card
       title={t_i18n('Attack patterns coverage')}
       action={(
-        <Stack direction='row' spacing={1}>
+        <Stack direction="row" spacing={1}>
           <StixCoreRelationshipCreationFromEntity
             entityId={securityCoverage.id}
             objectId={securityCoverage.id}
@@ -178,33 +178,33 @@ const SecurityCoverageAttackPatterns = ({
             </ToggleButton>
           </ToggleButtonGroup>
           {showKillChainSelector && viewMode === 'matrix' && (
-          <FormControl size="small" style={{ width: 194, height: 30 }}>
-            <Select
-              value={selectedKillChain}
-              onChange={handleKillChainChange}
-              variant="outlined"
-              displayEmpty
-              style={{ height: 30 }}
-            >
-              {killChains.map((chain) => (
-                <MenuItem key={chain} value={chain}>
-                  {(() => {
-                        if (chain === 'mitre-attack') return 'MITRE ATT&CK';
-                        if (chain === 'capec') return 'CAPEC';
-                        if (chain === 'disarm') return 'DISARM';
-                        return chain.toUpperCase();
-                      })()}
-                </MenuItem>
-                  ))}
-            </Select>
-          </FormControl>
-            )}
+            <FormControl size="small" style={{ width: 194, height: 30 }}>
+              <Select
+                value={selectedKillChain}
+                onChange={handleKillChainChange}
+                variant="outlined"
+                displayEmpty
+                style={{ height: 30 }}
+              >
+                {killChains.map((chain) => (
+                  <MenuItem key={chain} value={chain}>
+                    {(() => {
+                      if (chain === 'mitre-attack') return 'MITRE ATT&CK';
+                      if (chain === 'capec') return 'CAPEC';
+                      if (chain === 'disarm') return 'DISARM';
+                      return chain.toUpperCase();
+                    })()}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          )}
           <SearchInput
             variant="thin"
             onSubmit={setSearchTerm}
           />
         </Stack>
-        )}
+      )}
     >
       {viewMode === 'matrix' ? (
         <SecurityCoverageAttackPatternsMatrix
@@ -212,59 +212,59 @@ const SecurityCoverageAttackPatterns = ({
           searchTerm={searchTerm}
           selectedKillChain={selectedKillChain}
         />
-        ) : (
-          <>
-            <div className="clearfix" />
-            <List style={{ marginTop: -10 }}>
-              <FieldOrEmpty source={securityCoverage.attPatterns?.edges || []}>
-                {(securityCoverage.attPatterns?.edges || []).map((attackPatternEdge) => {
-                  const attackPattern = attackPatternEdge.node.to;
-                  const coverage = attackPatternEdge.node.coverage_information || [];
-                  return (
-                    <ListItem
-                      key={attackPatternEdge.node.id}
-                      dense={true}
-                      divider={true}
-                      disablePadding={true}
-                      secondaryAction={(
-                        <StixCoreRelationshipPopover
-                          objectId={securityCoverage.id}
-                          connectionKey="Pagination_attPatterns"
-                          stixCoreRelationshipId={attackPatternEdge.node.id}
-                          paginationOptions={paginationOptions}
-                          isCoverage={true}
-                        />
-                      )}
+      ) : (
+        <>
+          <div className="clearfix" />
+          <List style={{ marginTop: -10 }}>
+            <FieldOrEmpty source={securityCoverage.attPatterns?.edges || []}>
+              {(securityCoverage.attPatterns?.edges || []).map((attackPatternEdge) => {
+                const attackPattern = attackPatternEdge.node.to;
+                const coverage = attackPatternEdge.node.coverage_information || [];
+                return (
+                  <ListItem
+                    key={attackPatternEdge.node.id}
+                    dense={true}
+                    divider={true}
+                    disablePadding={true}
+                    secondaryAction={(
+                      <StixCoreRelationshipPopover
+                        objectId={securityCoverage.id}
+                        connectionKey="Pagination_attPatterns"
+                        stixCoreRelationshipId={attackPatternEdge.node.id}
+                        paginationOptions={paginationOptions}
+                        isCoverage={true}
+                      />
+                    )}
+                  >
+                    <ListItemButton
+                      component={Link}
+                      to={`/dashboard/analyses/security_coverages/${securityCoverage?.id}/relations/${attackPatternEdge.node.id}`}
+                      style={{ width: '100%' }}
                     >
-                      <ListItemButton
-                        component={Link}
-                        to={`/dashboard/analyses/security_coverages/${securityCoverage?.id}/relations/${attackPatternEdge.node.id}`}
-                        style={{ width: '100%' }}
-                      >
-                        <ListItemIcon>
-                          <ItemIcon color={theme.palette.primary.main} type="attack-pattern" />
-                        </ListItemIcon>
-                        <ListItemText
-                          primary={(
-                            <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
-                              <Typography variant="body2" component="span" sx={{ flex: '1 1 10%' }}>{attackPattern?.name}</Typography>
-                              <Box sx={{ flex: '1 1 auto', display: 'flex', justifyContent: 'center' }}>
-                                <SecurityCoverageInformation
-                                  coverage_information={coverage}
-                                  variant="header"
-                                />
-                              </Box>
+                      <ListItemIcon>
+                        <ItemIcon color={theme.palette.primary.main} type="attack-pattern" />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={(
+                          <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                            <Typography variant="body2" component="span" sx={{ flex: '1 1 10%' }}>{attackPattern?.name}</Typography>
+                            <Box sx={{ flex: '1 1 auto', display: 'flex', justifyContent: 'center' }}>
+                              <SecurityCoverageInformation
+                                coverage_information={coverage}
+                                variant="header"
+                              />
                             </Box>
-                          )}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  );
-                })}
-              </FieldOrEmpty>
-            </List>
-          </>
-        )}
+                          </Box>
+                        )}
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })}
+            </FieldOrEmpty>
+          </List>
+        </>
+      )}
     </Card>
   );
 };

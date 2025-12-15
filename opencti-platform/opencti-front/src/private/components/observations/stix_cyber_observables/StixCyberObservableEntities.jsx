@@ -209,7 +209,7 @@ class StixCyberObservableEntities extends Component {
     };
     return (
       <div style={{ height: '100%' }}>
-        <Card 
+        <Card
           title={t('Relations')}
           action={(
             <div>

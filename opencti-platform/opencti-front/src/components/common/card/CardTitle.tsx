@@ -4,8 +4,8 @@ import { useTheme } from '@mui/styles';
 import { Theme } from '../../Theme';
 
 interface CardTitleProps extends PropsWithChildren {
-  action?: ReactNode,
-  style?: CSSProperties,
+  action?: ReactNode;
+  style?: CSSProperties;
 }
 
 const CardTitle = ({
@@ -25,14 +25,14 @@ const CardTitle = ({
     marginBottom: 0,
     textTransform: 'capitalize',
     color: theme.palette.text.light,
-    lineHeight: '19px'
+    lineHeight: '19px',
   };
 
   return (
-    <Stack 
-      direction='row'
-      justifyContent='space-between'
-      alignItems='end'
+    <Stack
+      direction="row"
+      justifyContent="space-between"
+      alignItems="end"
       sx={containerSx}
     >
       <Typography variant="body2" sx={titleSx}>
