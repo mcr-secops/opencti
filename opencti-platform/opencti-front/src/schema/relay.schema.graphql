@@ -13309,7 +13309,7 @@ type DecayExclusionRule implements InternalObject & BasicObject {
   id: ID!
   standard_id: String!
   entity_type: String!
-  parent_types: [String]!
+  parent_types: [String!]!
   metrics: [Metric]
   created_at: DateTime!
   name: String!
