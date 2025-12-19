@@ -4103,6 +4103,7 @@ input ObservedDataAddInput {
   clientMutationId: String
   update: Boolean
   file: Upload
+  upsertOperations: [EditInput!]
 }
 
 ################ Opinions
@@ -8013,6 +8014,7 @@ input IncidentAddInput {
   clientMutationId: String
   update: Boolean
   file: Upload
+  upsertOperations: [EditInput!]
 }
 
 ######## STIX CYBER OBSERVABLES ENTITIES
