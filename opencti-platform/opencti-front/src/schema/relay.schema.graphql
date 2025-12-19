@@ -11372,6 +11372,7 @@ input TaskAddInput {
   x_opencti_workflow_id: String
   x_opencti_modified_at: DateTime
   update: Boolean
+  upsertOperations: [EditInput!]
 }
 
 type TaskTemplate implements InternalObject & BasicObject {
@@ -11677,6 +11678,7 @@ input CaseIncidentAddInput {
   clientMutationId: String
   update: Boolean
   authorized_members: [MemberAccessInput!]
+  upsertOperations: [EditInput!]
 }
 
 type RfiRequestAccessConfiguration {
@@ -11818,6 +11820,7 @@ input CaseRfiAddInput {
   caseTemplates: [String!]
   authorized_members: [MemberAccessInput!]
   x_opencti_request_access: String
+  upsertOperations: [EditInput!]
 }
 
 type CaseRft implements BasicObject & StixObject & StixCoreObject & StixDomainObject & Container & Case {
@@ -11951,6 +11954,7 @@ input CaseRftAddInput {
   takedown_types: [String!]
   caseTemplates: [String!]
   authorized_members: [MemberAccessInput!]
+  upsertOperations: [EditInput!]
 }
 
 type Feedback implements BasicObject & StixObject & StixCoreObject & StixDomainObject & Container & Case {
@@ -12075,6 +12079,7 @@ input FeedbackAddInput {
   clientMutationId: String
   update: Boolean
   rating: Int
+  upsertOperations: [EditInput!]
 }
 
 type DefaultValue {
