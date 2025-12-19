@@ -261,6 +261,7 @@ class StixCyberObservable(StixCyberObservableDeprecatedMixin):
         granted_refs = kwargs.get("objectOrganization", None)
         update = kwargs.get("update", False)
         resolve_result_indicators = kwargs.get("resolve_result_indicators", True)
+        upsert_operations = kwargs.get("upsert_operations", None)
 
         create_indicator = (
             observable_data["x_opencti_create_indicator"]
@@ -377,6 +378,7 @@ class StixCyberObservable(StixCyberObservableDeprecatedMixin):
                 "objectLabel": object_label,
                 "externalReferences": external_references,
                 "update": update,
+                "upsertOperations": upsert_operations,
             }
             query = (
                 """
