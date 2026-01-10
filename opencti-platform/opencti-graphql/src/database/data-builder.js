@@ -43,6 +43,9 @@ export const buildEntityData = async (context, user, input, type, opts = {}) => 
     R.assoc('creator_id', [user.internal_id]),
     R.dissoc('update'),
     R.dissoc('file'),
+    R.dissoc('fileMarkings'),
+    R.dissoc('files'),
+    R.dissoc('filesMarkings'),
     R.omit(schemaRelationsRefDefinition.getInputNames(input.entity_type)),
   )(input);
   if (inferred) {
